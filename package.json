@@ -9,6 +9,14 @@
     "express": "~4.1.1",
     "jade": "~0.31.2",
     "method-override": "^1.0.0",
-    "morgan": "^1.0.0"
+    "morgan": "^1.0.0",
+   "gulp": "^3.9.1",
+    "gulp-inject": "^3.0.0",
+    "gulp-jscs": "^3.0.2",
+    "gulp-jshint": "^2.0.0",
+    "gulp-nodemon": "^2.0.6",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0",
+    "wiredep": "^3.0.0"
   }
 }
