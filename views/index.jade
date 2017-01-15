@@ -2,18 +2,8 @@ extends layout
 
 block body
   div(ng-controller='AppCtrl')
-    h2 Hello {{name}}
-    ul.menu
-      li
-        a(href='view1') view1
-      li
-        a(href='view2') view2
-
     div(ng-view)
 
-    div
-      | Angular seed app: v
-      span(app-version)
 
   script(src='js/lib/angular/angular.js')
   script(src='js/app.js')
@@ -21,3 +11,16 @@ block body
   script(src='js/controllers.js')
   script(src='js/filters.js')
   script(src='js/directives.js')
+  
+  script(src='js/services/AuthService.js')
+  script(src='js/services/LoginService.js')
+  script(src='js/services/UrlService.js')
+  script(src='js/services/ProfilesService.js')
+  script(src='js/services/MessageService.js')
+  script(src='js/services/CommentService.js')
+  script(src='js/services/RatingsService.js')
+  
+  
+  script(src='js/controllers/LoginController.js')
+  script(src='js/controllers/ProfileController.js')
+

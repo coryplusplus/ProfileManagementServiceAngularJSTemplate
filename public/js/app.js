@@ -2,25 +2,27 @@
 
 // Declare app level module which depends on filters, and services
 
-angular.module('myApp', [
-  'myApp.controllers',
-  'myApp.filters',
-  'myApp.services',
-  'myApp.directives'
+angular.module('ProfileManagement', [
+  'ProfileManagement.controllers',
+  'ProfileManagement.filters',
+  'ProfileManagement.services',
+  'ProfileManagement.directives'
 ]).
 config(function ($routeProvider, $locationProvider) {
-  $routeProvider.
-    when('/view1', {
-      templateUrl: 'partials/partial1',
-      controller: 'MyCtrl1'
+    $routeProvider.
+    when('/login', {
+        templateUrl: 'partials/login'
     }).
-    when('/view2', {
-      templateUrl: 'partials/partial2',
-      controller: 'MyCtrl2'
+        when('/createProfile', {
+        templateUrl: 'partials/createProfile'
+    }).
+        when('/createProfile', {
+        templateUrl: 'partials/createProfile',
+        controller: 'ProfileController'
     }).
     otherwise({
-      redirectTo: '/view1'
+        redirectTo: 'login'
     });
 
-  $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
 });
