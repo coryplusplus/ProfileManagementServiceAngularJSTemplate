@@ -7,7 +7,7 @@
     var ProfileController = function (authService, profilesService, $scope, $http, $location, $anchorScroll, commentService, urlService) {
 
 
-
+        $scope.currentProfile = profilesService.getCurrentProfile()
 
 
         var updateProfiles = function () {
@@ -22,6 +22,13 @@
 
         }
 
+
+        var updateCurrentProfile = function updateCurrentProfile()
+        {
+            $scope.currentProfile = profilesService.getCurrentProfile()
+        }
+        
+        profilesService.registerObserverCallback(updateCurrentProfile)
 
 
 

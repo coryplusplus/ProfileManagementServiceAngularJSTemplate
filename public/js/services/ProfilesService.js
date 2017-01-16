@@ -244,6 +244,7 @@
                     currentProfile = resp.data
                     messageService.setTotalMessageCount(currentProfile["messageCount"])
                     messageService.populateMessages(currentProfile["profileName"])
+                    notifyObservers();
                     return resp;
                 }, function (reason) {
                     return reason;

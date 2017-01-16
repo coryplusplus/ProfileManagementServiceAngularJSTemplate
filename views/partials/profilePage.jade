@@ -27,8 +27,14 @@ html(lang='en')
   body
     #wrapper
         include navBar
-        .col-md-4.col-md-offset-4
-          .panel(style='padding-top: 25px')
+        .col-md-4(style='padding-top: 25px', ng-controller="ProfileController")
+            ul.list-group
+              li.list-group-item Profile Name :  {{currentProfile.profileName}}
+              li.list-group-item Email : {{currentProfile.email}}
+              li.list-group-item Unread Comments : {{currentProfile.unreadComments}}
+              li.list-group-item Total Messages : {{currentProfile.messageCount}}
+        .col-md-4(style='padding-top: 25px')
+          .panel
             .panel-body
               form(role='form')
                 fieldset
@@ -45,10 +51,6 @@ html(lang='en')
             div(ng-repeat="message in messages", style='padding-top: 50px')
                 .col-md-4.col-md-offset-4
                     .panel.panel-primary
-                        .panel-heading
-                            h3.panel-title
-                                a.btn.btn-link(ng-click="goToProfile(message.author)",ng-disabled="progress") Posted By : {{message.author}} 
-
                         .panel-body
                                 | {{message.message}}
                         .panel-footer(ng-controller='CommentController')

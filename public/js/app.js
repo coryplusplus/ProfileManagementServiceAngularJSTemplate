@@ -24,6 +24,10 @@ config(function ($routeProvider, $locationProvider) {
         templateUrl: 'partials/messageFeed',
         controller: 'MessageController'
     }).
+    when('/profile', {
+        templateUrl: 'partials/profilePage',
+        controller: 'MessageController'
+    }).
     otherwise({
         redirectTo: 'login'
     });

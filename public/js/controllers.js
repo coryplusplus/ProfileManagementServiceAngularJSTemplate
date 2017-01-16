@@ -3,11 +3,23 @@
 /* Controllers */
 
 angular.module('ProfileManagement.controllers', []).
-controller('AppCtrl', function ($scope, $http, authService) {
+controller('AppCtrl', function ($scope, $http, $location, authService, profilesService, userLogin) {
+
 
 
     var onError = function onError(reason) {
         $scope.error = reason;
+    }
+
+    var changeLocation = function (location) {
+        $location.path(location)
+    }
+    $scope.goToProfile = function (profileName) {
+        profilesService.getProfile(profileName).then(changeLocation("profile", onError))
+    }
+
+    $scope.goHome = function () {
+        $scope.goToProfile(userLogin.getUserName())
     }
 
     var onAuthComplete = function onAuthComplete(resp) {
