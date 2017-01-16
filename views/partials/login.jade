@@ -28,9 +28,9 @@ html(lang='en')
                   form(role='form')
                     fieldset
                       .form-group
-                        input.form-control(placeholder='Username', name='username', type='username', autofocus='', ng-model="username")
+                        input.form-control(placeholder='Username', name='username', type='username',autofocus='', ng-model="username")
                       .form-group
-                        input.form-control(placeholder='Password', name='password', type='password', value='', ng-model="password")
+                        input.form-control(placeholder='Password', name='password', type='password', value='=', ng-model="password")
                       // Change this to a button or input when using this as a form
                       a.btn.btn-lg.btn-primary.btn-block(ng-click="userLogin(username,password)",ng-disabled="progress") Login
                       a.btn.btn-small.btn-info.btn-link.btn-block(href="createProfile") Sign Up

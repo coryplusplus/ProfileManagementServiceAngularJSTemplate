@@ -13,12 +13,16 @@ config(function ($routeProvider, $locationProvider) {
     when('/login', {
         templateUrl: 'partials/login'
     }).
-        when('/createProfile', {
+    when('/createProfile', {
         templateUrl: 'partials/createProfile'
     }).
-        when('/createProfile', {
+    when('/createProfile', {
         templateUrl: 'partials/createProfile',
         controller: 'ProfileController'
+    }).
+    when('/messageFeed', {
+        templateUrl: 'partials/messageFeed',
+        controller: 'MessageController'
     }).
     otherwise({
         redirectTo: 'login'

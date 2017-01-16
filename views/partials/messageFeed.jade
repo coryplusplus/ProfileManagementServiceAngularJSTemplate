@@ -1,0 +1,71 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title SB Admin 2 - Bootstrap Admin Theme
+    // Bootstrap Core CSS
+    link(href='../vendor/bootstrap/css/bootstrap.min.css', rel='stylesheet')
+    // MetisMenu CSS
+    link(href='../vendor/metisMenu/metisMenu.min.css', rel='stylesheet')
+    // DataTables CSS
+    link(href='../vendor/datatables-plugins/dataTables.bootstrap.css', rel='stylesheet')
+    // DataTables Responsive CSS
+    link(href='../vendor/datatables-responsive/dataTables.responsive.css', rel='stylesheet')
+    // Custom CSS
+    link(href='../dist/css/sb-admin-2.css', rel='stylesheet')
+    // Custom Fonts
+    link(href='../vendor/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+  body
+    #wrapper
+        include navBar
+        .col-md-4.col-md-offset-4
+          .panel(style='padding-top: 25px')
+            .panel-body
+              form(role='form')
+                fieldset
+                  .form-group
+                    textarea.form-control(placeholder="What's on your mind?", name='description', type='description',ng-model="description" ,rows="5")
+                    .col-md-3.col-md-offset-6(style='padding-top: 25px;padding-left: 25px')
+                        a.btn.btn-med.btn-default.btn-block(ng-click="clearText()",ng-disabled="progress") Clear
+
+                    .col-md-3(style='padding-top: 25px;padding-left: 25px')
+                        a.btn.btn-med.btn-primary.btn-block(ng-click="postMessage(description)",ng-disabled="progress") Post
+
+
+        div(ng-init="loadMessages(0)")
+            div(ng-repeat="message in messages", style='padding-top: 50px')
+                .col-md-4.col-md-offset-4
+                    .panel.panel-primary
+                        .panel-heading
+                            h3.panel-title
+                                | {{message.author}}
+                        .panel-body
+                                | {{message.message}}
+                        .panel-footer(ng-controller='CommentController')
+                            a.btn.btn-link(ng-click="loadComments(message.id, 0)",ng-disabled="progress") {{message.totalComments}} Comments
+                            div(ng-repeat="comment in comments",ng-show="commentsLoaded(comment.messageId)")       
+                                    .panel.panel-primary
+                                        .panel-heading
+                                            h3.panel-title
+                                                | {{comment.author}}
+                                        .panel-body
+                                                | {{comment.message}}
+                                      form(role='form')
+                            fieldset
+                              .form-group
+                                textarea.form-control(placeholder="Comment", name='description', type='description',ng-model="commentDescription" ,rows="1")
+
+                                .col-md-3(style='padding-top: 25px;padding-left: 25px')
+                                    a.btn.btn-med.btn-primary.btn-block(ng-click="postComment(message.id,commentDescription)",ng-disabled="progress") Post
+
+
+
