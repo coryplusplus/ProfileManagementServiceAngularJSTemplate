@@ -69,9 +69,9 @@
                 var credentials = "Bearer " + authService.getToken()
 
                 console.log("Attempting to populate messages")
-                var queryParams = "?start=" + start + "&size=" + size
+                var queryParams = ""//?start=" + start + "&size=" + size
                 if (profileName != undefined && profileName != "") {
-                    queryParams = queryParams + "&author=" + profileName
+                    queryParams = queryParams + "?author=" + profileName
                 }
 
 

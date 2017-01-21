@@ -57,7 +57,7 @@ html(lang='en')
                                     .panel.panel-info
                                         .panel-heading
                                             h3.panel-title
-                                                | {{comment.author}}
+                                                a.btn.btn-link(ng-click="goToProfile(comment.author)",ng-disabled="progress") Posted By : {{comment.author}} 
                                         .panel-body
                                                 | {{comment.message}}
                                       form(role='form')

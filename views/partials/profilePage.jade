@@ -27,24 +27,14 @@ html(lang='en')
   body
     #wrapper
         include navBar
-        .col-md-4(style='padding-top: 25px', ng-controller="ProfileController")
-            ul.list-group
-              li.list-group-item Profile Name :  {{currentProfile.profileName}}
-              li.list-group-item Email : {{currentProfile.email}}
-              li.list-group-item Unread Comments : {{currentProfile.unreadComments}}
-              li.list-group-item Total Messages : {{currentProfile.messageCount}}
-        .col-md-4(style='padding-top: 25px')
-          .panel
-            .panel-body
-              form(role='form')
-                fieldset
-                  .form-group
-                    textarea.form-control(placeholder="What's on your mind?", name='description', type='description',ng-model="description" ,rows="5")
-                    .col-md-3.col-md-offset-6(style='padding-top: 25px;padding-left: 25px')
-                        a.btn.btn-med.btn-default.btn-block(ng-click="clearText()",ng-disabled="progress") Clear
-
-                    .col-md-3(style='padding-top: 25px;padding-left: 25px')
-                        a.btn.btn-med.btn-primary.btn-block(ng-click="postMessage(description)",ng-disabled="progress") Post
+        div
+        .col-md-12(style='padding-top: 25px', ng-controller="ProfileController")
+            .col-md-4.col-md-offset-4
+                ul.list-group
+                  li.list-group-item Profile Name :  {{currentProfile.profileName}}
+                  li.list-group-item Email : {{currentProfile.email}}
+                  li.list-group-item Unread Comments : {{currentProfile.unreadComments}}
+                  li.list-group-item Total Messages : {{currentProfile.messageCount}}
 
 
         div(ng-init="loadMessages(0)")
@@ -59,7 +49,7 @@ html(lang='en')
                                     .panel.panel-info
                                         .panel-heading
                                             h3.panel-title
-                                                | {{comment.author}}
+                                                a.btn.btn-link(ng-click="goToProfile(comment.author)",ng-disabled="progress") Posted By : {{comment.author}} 
                                         .panel-body
                                                 | {{comment.message}}
                                       form(role='form')
