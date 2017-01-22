@@ -63,6 +63,10 @@
                 searchMessages = []
                 notifyObservers()
             }
+            
+            var clearMessages = function() {
+                messages = []
+            }
             var populateMessages = function (profileName) {
                 messages = []
                 currentProfileName = profileName
@@ -235,6 +239,7 @@
             populateMessagesFromSearch: populateMessagesFromSearch,
             clearSearchMessages: clearSearchMessages,
             postMessage: postMessage,
+            clearMessages : clearMessages,
 
 
         };

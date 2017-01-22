@@ -1,4 +1,4 @@
-nav.navbar.navbar-custom
+nav.navbar.navbar-custom(ng-controller="NavigationController")
   .container-fluid
     // Brand and toggle get grouped for better mobile display
     .navbar-header
@@ -11,10 +11,10 @@ nav.navbar.navbar-custom
     // Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav
-        li
+        li(ng-class="{ active: isActive('/messageFeed')}")
           a(href='messageFeed') Message Feed
 
-        li
+        li(ng-class="{ active: isActive('/profile')}")
           a(ng-click="goHome()")
             | My Profile 
             span.sr-only (current)

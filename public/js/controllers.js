@@ -6,7 +6,6 @@ angular.module('ProfileManagement.controllers', []).
 controller('AppCtrl', function ($scope, $http, $location, authService, profilesService, userLogin) {
 
 
-
     var onError = function onError(reason) {
         $scope.error = reason;
     }

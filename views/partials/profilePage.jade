@@ -58,7 +58,7 @@ html(lang='en')
                                 textarea.form-control(placeholder="Comment", name='description', type='description',ng-model="commentDescription" ,rows="1")
 
                                 .col-md-3(style='padding-top: 25px;padding-left: 25px')
-                                    a.btn.btn-med.btn-primary.btn-block(ng-click="postComment(message.id,commentDescription)",ng-disabled="progress") Post
+                                    a.btn.btn-med.btn-primary.btn-block(ng-click="postComment(message.id,commentDescription,message.author)",ng-disabled="progress") Post
 
 
 

@@ -92,7 +92,13 @@
                 $scope.error = ""
                 $scope.errorMessage = ""
                 $scope.success = "Successfully retrieved message."
-                messageService.loadMessages(0)
+                if ($scope.author != undefined) {
+                    messageService.clearMessages()
+                    messageService.populateMessages($scope.author)
+                } else {
+                    messageService.loadMessages(0)
+
+                }
             } else {
                 $scope.error = "Failed to retrieve message";
 
@@ -103,7 +109,8 @@
 
             }
         }
-        $scope.postComment = function (messageId, comment) {
+        $scope.postComment = function (messageId, comment, author) {
+            $scope.author = author
             $scope.messageId = messageId
             console.log("Posting comment: " + comment)
             commentService.postComment(messageId, comment).then(postCommentComplete, onError)
