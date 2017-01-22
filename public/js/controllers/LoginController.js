@@ -7,8 +7,8 @@
     var LoginController = function (userLogin, authService, $scope, $http, $location, $window, $rootScope) {
 
 
-        $scope.username = "testing"
-        $scope.password = "password"
+        $scope.username = ""
+        $scope.password = ""
         var onLoginComplete = function onLoginComplete(resp) {
             $scope.status = resp.status
             if ($scope.status == 200) {
