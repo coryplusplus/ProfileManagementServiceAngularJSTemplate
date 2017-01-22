@@ -92,7 +92,6 @@
             console.log("running userLogin");
             userLogin.userLogin($scope.username, $scope.password).then(onLoginComplete, onError);
 
-            //requestToken("test@cloudconfidant.com", "Password123!@#")
 
 
 

@@ -67,26 +67,6 @@
         }
 
 
-
-
-        var requestSingleUseToken = function () {
-
-            var credentials = btoa("ckelly@cloudconfidant.com" + ':' + "XZR2PRUyr4dw+Nh9MxwW5w==");
-
-
-            return $http.get(urlService.getSingleUseToken(), {
-                    headers: {
-                        'Authorization': credentials
-                    }
-                })
-                .then(function (resp) {
-                    return resp.data["token"];
-                }, function (reason) {
-                    return reason;
-                });
-        };
-
-
         var requestToken = function (uname, password) {
 
             var credentials = btoa(uname + ':' + password);
