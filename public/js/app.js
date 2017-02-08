@@ -6,8 +6,12 @@ angular.module('ProfileManagement', [
   'ProfileManagement.controllers',
   'ProfileManagement.filters',
   'ProfileManagement.services',
-  'ProfileManagement.directives'
+  'ProfileManagement.directives',
+  'mwl.calendar',
+  'ngRoute',
+  'ui.bootstrap',
 ]).
+
 config(function ($routeProvider, $locationProvider) {
     $routeProvider.
     when('/login', {
@@ -27,6 +31,10 @@ config(function ($routeProvider, $locationProvider) {
     when('/profile', {
         templateUrl: 'partials/profilePage',
         controller: 'MessageController'
+    }).
+    when('/calendar', {
+        templateUrl: 'partials/calendar',
+        controller: 'CalendarController'
     }).
     otherwise({
         redirectTo: 'login'

@@ -7,7 +7,6 @@
     var NavigationController = function ($scope,$location) {
 
         $scope.isActive = function (viewLocation) {
-            console.log("Checking path for viewLocation: " + viewLocation + " and location path " + $location.path())
             return viewLocation === $location.path();
         };
 

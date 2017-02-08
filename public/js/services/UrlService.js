@@ -21,8 +21,12 @@
         subscriptions = payments + "/subscription"
         card = payments + "/card"
         contactsURL = baseUrl + "contacts"
+        calendarURL = baseUrl + "calendar"
 
 
+        var getCalendarURL = function() {
+            return calendarURL;
+        }
         var getContactsURL = function() {
             return contactsURL;
         }
@@ -102,6 +106,7 @@
             getSingleUseToken:getSingleUseToken,
             getContactsURL:getContactsURL,
             getAuthenticateUserURL:getAuthenticateUserURL,
+            getCalendarURL:getCalendarURL,
         };
     };
 

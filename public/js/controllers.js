@@ -47,23 +47,14 @@ controller('AppCtrl', function ($scope, $http, $location, authService, profilesS
 
     $scope.authorize = function () {
         if (authService.getToken() == undefined) {
-            requestToken("test@cloudconfidant.com", "Password123!@#")
+            requestToken("coryplusplus@gmail.com", "Nssck20!3#")
 
         }
 
 
     }
 
-    $http({
-        method: 'GET',
-        url: '/api/name'
-    }).
-    success(function (data, status, headers, config) {
-        $scope.name = data.name;
-    }).
-    error(function (data, status, headers, config) {
-        $scope.name = 'Error!';
-    });
+
 
 }).
 controller('MyCtrl1', function ($scope) {
