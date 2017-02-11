@@ -1,0 +1,28 @@
+div(ng-controller='CalendarController as vm', ng-init="init()")
+  include navBar
+  .container
+
+    .col-sm-8.col-sm-offset-2
+        .panel.panel-default
+          .panel-body
+            // Nav tabs
+            ul.nav.nav-pills
+              li(ng-repeat="scheduleHeader in scheduleHeaders",ng-class="{'active':activeTab == $index}")
+                a(ng-click="setActiveTab($index)",ng-disabled="progress", data-toggle='tab') 
+                    {{scheduleHeader["weekday"]}}
+            // Tab panes
+            .tab-content
+              .div(ng-repeat="scheduleHeader in scheduleHeaders",ng-class="{'tab-pane active': activeTab == $index, 'tab-pane' : activeTab != $index}")
+                .jumbotron(class="text-center")
+                  h1.display-3 {{scheduleHeader["month"]}}  {{scheduleHeader["date"]}}
+                .row(style='padding-top: 25px')
+                    table#dataTables-example.table.table-striped.table-hover(width='100%')
+
+                        tbody
+                            tr.gradeU( ng-repeat="timeSlot in timeSlots")
+                                td.col-md-5 {{timeSlot["displayText"]}}
+                                td.col-md-5  {{timeSlot["price"]}}
+                                td.col-md-5 
+                                    a.btn.btn-med.btn-info.btn-block(ng-click="addEntry(timeSlot, scheduleHeader)",ng-disabled="progress",style="border-radius: 24px") Choose                                
+                                
+                                

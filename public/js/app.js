@@ -36,6 +36,10 @@ config(function ($routeProvider, $locationProvider) {
         templateUrl: 'partials/calendar',
         controller: 'CalendarController'
     }).
+    when('/schedule', {
+        templateUrl: 'partials/schedule',
+        controller: 'ScheduleController'
+    }).
     otherwise({
         redirectTo: 'login'
     });

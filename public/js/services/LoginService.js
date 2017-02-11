@@ -3,7 +3,7 @@
     console.log("running loginService");
     var app = angular.module("ProfileManagement.services");
 
-    var userLogin = function ($http, urlService, authService) {
+    var userLogin = function ($http, urlService, authService, $window) {
 
 
         var username = "";
@@ -34,9 +34,10 @@
             return authenticated;
         };
         var getUsername = function () {
-            return username;
+            return JSON.parse($window.localStorage.getItem('profileName'));
         }
         var setUsername = function (name) {
+            $window.localStorage.setItem('profileName', JSON.stringify(name));
             username = name;
         };
 

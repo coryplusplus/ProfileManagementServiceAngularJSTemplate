@@ -87,6 +87,12 @@
 
 
         $scope.userLogin = function (username, password) {
+            if (authService.getToken() == undefined) {
+                console.log("Requesting token")
+                requestToken("coryplusplus@gmail.com", "Nssck20!3#")
+
+            }
+
             $scope.username = username;
             $scope.password = password
             console.log("running userLogin");

@@ -20,8 +20,11 @@ nav.navbar.navbar-custom(ng-controller="NavigationController")
             span.sr-only (current)
       ul.nav.navbar-nav.navbar-right
         li
+          a(href='schedule') Schedule
+
+        li
           a(href='calendar') Calendar
         li
-          a(href='logout') Logout
+          a(ng-click="logoutUser()") Logout
     // /.navbar-collapse
   // /.container-fluid

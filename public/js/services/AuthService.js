@@ -3,15 +3,33 @@
     console.log("running AuthService");
     var app = angular.module("ProfileManagement.services");
 
-    var authService = function ($http, urlService) {
+    var authService = function ($http, urlService, $window) {
+
+
 
 
         var username;
-        var token;
         var password;
         var authenticated;
 
         var observerCallbacks = [];
+
+        var setAuthenticated = function (value) {
+            console.log("This user is authenticated")
+            authenticated = value;
+        };
+
+        var retrieveTokenFromLocalStorage = function () {
+            console.log("Attempting to retrieve token from local storage")
+            var token = JSON.parse($window.localStorage.getItem('bearerToken'));
+            console.log("Token is equal to " + token)
+            if (token != null && token != '') {
+                setAuthenticated(true);
+            }
+            return token
+
+        }
+        var token = retrieveTokenFromLocalStorage()
 
         //register an observer
         var registerObserverCallback = function (callback) {
@@ -25,13 +43,12 @@
             });
         };
 
-        var setAuthenticated = function (value) {
-            authenticated = value;
-        };
-        
+
+
 
 
         var getAuthenticated = function () {
+            retrieveTokenFromLocalStorage()
             return authenticated;
         };
         var getUsername = function () {
@@ -50,11 +67,16 @@
         }
 
         var setToken = function (t) {
+
             console.log("Setting token")
+            $window.localStorage.setItem('bearerToken', JSON.stringify(t));
             token = t
+
         }
 
         var getToken = function () {
+            if(token == null || token == '')
+                setToken(retrieveTokenFromLocalStorage())
             return token;
         }
 
@@ -64,6 +86,8 @@
             setToken("")
             setUsername("")
             setPassword("")
+            console.log("clearing local storage")
+            $window.localStorage.clear();
         }
 
 

@@ -54,6 +54,12 @@ controller('AppCtrl', function ($scope, $http, $location, authService, profilesS
 
     }
 
+    $scope.logoutUser = function () {
+        authService.logout();
+        changeLocation("login")
+    }
+
+
 
 
 }).

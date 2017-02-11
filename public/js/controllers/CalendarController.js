@@ -4,8 +4,12 @@
 
 
     console.log("Running Home Controller")
-    var CalendarController = function ($scope, $http, $location, calendarConfig, calendarService) {
+    var CalendarController = function ($scope, $http, $location, calendarConfig, calendarService, authService) {
 
+
+        if (!authService.getAuthenticated()) {
+            $location.path("/login")
+        }
         var vm = this;
 
         $scope.calendarEntries = calendarService.getCalendarEntries()
@@ -25,14 +29,15 @@
         }
 
         var populateEvents = function populateEvents() {
-            var arrayLength = $scope.calendarEntries.length;arrayLength
+            var arrayLength = $scope.calendarEntries.length;
+            arrayLength
             vm.events = []
             for (var i = 0; i < arrayLength; i++) {
                 console.log("Adding a calendar entry")
                 vm.events.push({
                     title: $scope.calendarEntries[i].profileName + ":" + $scope.calendarEntries[i].description,
-                    startsAt: new Date($scope.calendarEntries[i].startDate*1000),
-                    endsAt: new Date($scope.calendarEntries[i].stopDate*1000),
+                    startsAt: new Date($scope.calendarEntries[i].startDate * 1000),
+                    endsAt: new Date($scope.calendarEntries[i].stopDate * 1000),
                     color: calendarConfig.colorTypes.important,
                     draggable: true,
                     resizable: true
@@ -42,20 +47,18 @@
         }
         calendarService.registerObserverCallback(updateCalendarEntries)
 
-        
-        $scope.previousSelected = function previousSelected()
-        {
+
+        $scope.previousSelected = function previousSelected() {
             vm.cellIsOpen = false
             calendarService.populateCalendarEntries(vm.viewDate)
         }
-        
-        $scope.nextSelected = function nextSelected()
-        {
-            vm.cellIsOpen = false
-            calendarService.populateCalendarEntries(vm.viewDate)
-        }
-        //These variables MUST be set as a minimum for the calendar to work
-        vm.calendarView = 'year';
+
+        $scope.nextSelected = function nextSelected() {
+                vm.cellIsOpen = false
+                calendarService.populateCalendarEntries(vm.viewDate)
+            }
+            //These variables MUST be set as a minimum for the calendar to work
+        vm.calendarView = 'month';
         vm.viewDate = new Date();
         var actions = [{
             label: '<i class=\'glyphicon glyphicon-pencil\'></i>',

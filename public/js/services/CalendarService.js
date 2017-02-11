@@ -3,7 +3,7 @@
     console.log("running calendar service");
     var app = angular.module("ProfileManagement.services");
 
-    var calendarService = function ($http, urlService, authService) {
+    var calendarService = function ($http, urlService, authService, userLogin) {
 
 
         var calendarEntries = []
@@ -51,11 +51,35 @@
 
 
         };
+        
+        var addEntry = function (startDate, stopDate, description) {
+            var credentials = "Bearer " + authService.getToken()
+
+            console.log("description:" + description)
+            return $http.post(urlService.getCalendarURL() + "/entry", {
+                    "startDate": startDate,
+                    "stopDate": stopDate,
+                    "profileName": userLogin.getUserName(),
+                    "description":description
+                }, {
+                    headers: {
+                        'Authorization': credentials
+                    }
+                })
+                .then(function (resp) {
+                    notifyObservers();
+                    return resp;
+                }, function (reason) {
+                    return reason;
+                });
+
+        }
 
         return {
             registerObserverCallback: registerObserverCallback,
             populateCalendarEntries:populateCalendarEntries,
             getCalendarEntries:getCalendarEntries,
+            addEntry:addEntry,
 
         };
     };
