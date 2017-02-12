@@ -8,10 +8,15 @@
 
         var calendarEntries = []
         var observerCallbacks = [];
-
-        //register an observer
+        var getCountCallbacks = [];
+        var count = 0
+            //register an observer
         var registerObserverCallback = function (callback) {
             observerCallbacks.push(callback);
+        };
+
+        var registerGetCountCallback = function (callback) {
+            getCountCallbacks.push(callback);
         };
 
         //call this when you know 'foo' has been changed
@@ -21,11 +26,16 @@
             });
         };
 
-        var getCalendarEntries = function()
-        {
+        var notifyGetCountObservers = function () {
+            angular.forEach(getCountCallbacks, function (callback) {
+                callback();
+            });
+        };
+
+        var getCalendarEntries = function () {
             return calendarEntries
         }
-        
+
         var populateCalendarEntries = function (date) {
 
             var credentials = "Bearer " + authService.getToken()
@@ -35,7 +45,7 @@
             var year = date.getUTCFullYear();
 
 
-            return $http.get(urlService.getCalendarURL() + "?month="+month + "&year="+year , {
+            return $http.get(urlService.getCalendarURL() + "?month=" + month + "&year=" + year, {
                     headers: {
                         'Authorization': credentials
                     }
@@ -51,7 +61,33 @@
 
 
         };
-        
+
+        var getCount = function () {
+            return count;
+        }
+
+        var populateCount = function (date) {
+
+            var credentials = "Bearer " + authService.getToken()
+
+
+            return $http.get(urlService.getCalendarURL() + "/count/" + Math.round(date.getTime() / 1000), {
+                    headers: {
+                        'Authorization': credentials
+                    }
+                })
+                .then(function (resp) {
+                    count = resp.data["count"]
+                    notifyGetCountObservers();
+                    return resp;
+                }, function (reason) {
+                    return reason;
+                });
+
+
+
+        };
+
         var addEntry = function (startDate, stopDate, description) {
             var credentials = "Bearer " + authService.getToken()
 
@@ -60,7 +96,7 @@
                     "startDate": startDate,
                     "stopDate": stopDate,
                     "profileName": userLogin.getUserName(),
-                    "description":description
+                    "description": description
                 }, {
                     headers: {
                         'Authorization': credentials
@@ -77,9 +113,12 @@
 
         return {
             registerObserverCallback: registerObserverCallback,
-            populateCalendarEntries:populateCalendarEntries,
-            getCalendarEntries:getCalendarEntries,
-            addEntry:addEntry,
+            registerGetCountCallback: registerGetCountCallback,
+            populateCalendarEntries: populateCalendarEntries,
+            getCalendarEntries: getCalendarEntries,
+            addEntry: addEntry,
+            populateCount: populateCount,
+            getCount: getCount,
 
         };
     };

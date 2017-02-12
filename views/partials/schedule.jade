@@ -1,8 +1,8 @@
 div(ng-controller='CalendarController as vm', ng-init="init()")
   include navBar
   .container
-
     .col-sm-8.col-sm-offset-2
+
         .panel.panel-default
           .panel-body
             // Nav tabs
@@ -19,10 +19,12 @@ div(ng-controller='CalendarController as vm', ng-init="init()")
                     table#dataTables-example.table.table-striped.table-hover(width='100%')
 
                         tbody
-                            tr.gradeU( ng-repeat="timeSlot in timeSlots")
+                            tr.gradeU( ng-repeat="timeSlot in timeSlots[$index]")
                                 td.col-md-5 {{timeSlot["displayText"]}}
                                 td.col-md-5  {{timeSlot["price"]}}
-                                td.col-md-5 
+                                td.col-md-5(ng-if='timeSlot["available"]')
                                     a.btn.btn-med.btn-info.btn-block(ng-click="addEntry(timeSlot, scheduleHeader)",ng-disabled="progress",style="border-radius: 24px") Choose                                
+                                td.col-md-5(ng-if='!timeSlot["available"]')
+                                    a.btn.btn-med.btn-warn.btn-link Unavailable                                
                                 
                                 
