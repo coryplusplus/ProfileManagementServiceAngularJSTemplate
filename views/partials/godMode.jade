@@ -1,0 +1,7 @@
+div(ng-controller='GodModeController', ng-init="init()")
+  include navBar
+  .container
+    ui-gmap-google-map(center='map.center', zoom='map.zoom')
+        ui-gmap-marker(coords='marker.coords', options='marker.options', events='marker.events', idkey='marker.id')
+
+

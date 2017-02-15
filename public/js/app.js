@@ -10,6 +10,7 @@ angular.module('ProfileManagement', [
   'mwl.calendar',
   'ngRoute',
   'ui.bootstrap',
+  'uiGmapgoogle-maps',
 ]).
 
 config(function ($routeProvider, $locationProvider) {
@@ -39,6 +40,10 @@ config(function ($routeProvider, $locationProvider) {
     when('/schedule', {
         templateUrl: 'partials/schedule',
         controller: 'ScheduleController'
+    }).
+    when('/godMode', {
+        templateUrl: 'partials/godMode',
+        controller: 'GodModeController'
     }).
     otherwise({
         redirectTo: 'login'
