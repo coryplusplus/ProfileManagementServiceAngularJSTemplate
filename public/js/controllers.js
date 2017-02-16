@@ -47,7 +47,7 @@ controller('AppCtrl', function ($scope, $http, $location, authService, profilesS
 
     $scope.authorize = function () {
         if (authService.getToken() == undefined) {
-            requestToken("coryplusplus@gmail.com", "Nssck20!3#")
+            requestToken("test@cloudconfidant.com", "Password123!@#")
 
         }
 
