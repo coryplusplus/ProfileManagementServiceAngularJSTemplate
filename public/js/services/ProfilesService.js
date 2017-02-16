@@ -38,6 +38,7 @@
         var searchMonth = ""
         var searchDay = ""
         var searchByDayOfWeek = ""
+        var locations = {}
 
 
 
@@ -47,6 +48,14 @@
 
         var getCurrentPage = function () {
             return currentPage;
+        }
+
+        var getLocations = function () {
+            var onlyLocation = []
+            for (var key in locations) {
+                onlyLocation.push(locations[key]);
+            }
+            return onlyLocation;
         }
 
         var setCurrentPage = function (page) {
@@ -118,7 +127,38 @@
 
         };
 
-        var editProfile = function (profileName, firstName, lastName, email, password, deviceId, avatar,banned,reportedCount, index) {
+        var updateProfileLocation = function (userName, latitude, longitude) {
+            var credentials = "Bearer " + authService.getToken()
+
+
+            return $http.put(urlService.getProfilesURL() + "/" + userName + "/location", {
+                    "latitude": latitude,
+                    "longitude": longitude,
+                }, {
+                    headers: {
+                        'Authorization': credentials
+                    }
+                })
+                .then(function (resp) {
+                    var data = {
+                        "latitude": resp.latitude,
+                        "longitude": resp.longitude,
+                        "profileName": resp.profileName,
+                    }
+                    //Use a map here since more efficient
+                    locations[userName] = data
+                    notifyObservers();
+
+                    return resp;
+                }, function (reason) {
+                    return reason;
+                });
+
+
+
+        };
+
+        var editProfile = function (profileName, firstName, lastName, email, password, deviceId, avatar, banned, reportedCount, index) {
             var credentials = "Bearer " + authService.getToken()
 
 
@@ -254,6 +294,32 @@
 
         };
 
+        var populateAllLocations = function () {
+
+            var credentials = "Bearer " + authService.getToken()
+
+
+            return $http.get(urlService.getProfilesURL() + "/locations", {
+                    headers: {
+                        'Authorization': credentials
+                    }
+                })
+                .then(function (resp) {
+                    if (resp.data.length != 0)
+                        angular.forEach(resp.data, function (data) {
+                            locations[data["profileName"]] = data
+                        });
+
+                    notifyObservers();
+                    return resp;
+                }, function (reason) {
+                    return reason;
+                });
+
+
+
+        };
+
         var getCurrentProfile = function () {
             return currentProfile
         }
@@ -277,6 +343,9 @@
             getCurrentProfileMessageCount: getCurrentProfileMessageCount,
             getCurrentPage: getCurrentPage,
             setCurrentPage: setCurrentPage,
+            getLocations: getLocations,
+            populateAllLocations: populateAllLocations,
+            updateProfileLocation: updateProfileLocation,
 
 
         };

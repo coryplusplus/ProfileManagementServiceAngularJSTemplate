@@ -4,7 +4,8 @@
     var app = angular.module("ProfileManagement.services");
 
     var urlService = function ($http) {
-        prod_endpoint = "http://localhost:8080"
+        //prod_endpoint = "http://localhost:8080"
+        prod_endpoint = "http://c019356a.ngrok.io"
         sandbox_endpoint = "http://api.develop.cloudconfidant.com"
         baseUrl = prod_endpoint + "/profileManagementService/webapi/v1/"
         customerURL = baseUrl + "customers"

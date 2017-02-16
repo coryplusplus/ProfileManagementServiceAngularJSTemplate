@@ -1,7 +1,26 @@
 div(ng-controller='GodModeController', ng-init="init()")
   include navBar
   .container
-    ui-gmap-google-map(center='map.center', zoom='map.zoom')
-        ui-gmap-marker(coords='marker.coords', options='marker.options', events='marker.events', idkey='marker.id')
+    .row(style='padding-top: 200px')
+     .col-md-2
+          .login-panel.panel.panel-default
+            .panel-heading
+              h3.panel-title Update Location
+            .panel-body
+              form(role='form')
+                fieldset
+                  .form-group
+                    input.form-control(placeholder='Latitude', name='latitude', type='number',autofocus='', ng-model="latitude")
+                  .form-group
+                    input.form-control(placeholder='Longitude', name='longitude', type='number', value='=', ng-model="longitude")
+                  // Change this to a button or input when using this as a form
+                  a.btn.btn-lg.btn-primary.btn-block(ng-click="updateLocation(latitude,longitude)",ng-disabled="progress") Update
+
+      .col-md-10
+          ui-gmap-google-map(center='map.center', zoom='map.zoom', modelsbyref="false")
+            .div(ng-repeat="marker in markers")
+                ui-gmap-marker(coords='marker.coords', options='marker.options', events='marker.events', idkey='marker.id')
+
+
 
 
